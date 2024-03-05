@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Continents</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid w100" style="margin-top: 70px;">
+        <h1 class="mt-5 text-center">Continents</h1>
+        <ul style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); margin-bottom: 50px;" class="list-group mt-3">
+            {% for continent in continents %}
+            <li class="list-group-item"><strong><a href="{% url 'detail_continent' continent.id %}">{{ continent.nom }}</a></strong></li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'ajouter_continent' %}" class="btn btn-primary mt-3 w-100">Ajouter un continent</a>
+        
+    </div>
+    {% for continent in continents %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            {{ continent.nom }}
+            <a href="{% url 'supprimer_continent' continent.id %}">Supprimer</a>
+        </li>
+    </ul>
+   
+    {% endfor %}
+    <script src="../static/js/all.js"></script>
+</body>
+</html>
