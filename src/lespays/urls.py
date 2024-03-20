@@ -1,11 +1,11 @@
 from django.urls import path
 from lespays import views
-
+devise
 urlpatterns = [
     path('', views.accueil, name='accueil'),
-    path('ajouter_continent/', views.ajouter_continent, name='ajouter_continent'),
-    path('ajouter_pays/<int:continent_id>/', views.ajouter_pays, name='ajouter_pays'),
-    path('detail_continent/<int:continent_id>/', views.detail_continent, name='detail_continent'),
-    path('supprimer_continent/<int:continent_id>/', views.supprimer_continent, name='supprimer_continent'),
-    path('supprimer_pays/<int:pays_id>/', views.supprimer_pays, name='supprimer_pays'),
+    path('ajouter_classe/', views.ajouter_classe, name='ajouter_classe'),
+    path('ajouter_eleve/<int:classe_id>/', views.ajouter_eleve, name='ajouter_eleve'),
+    path('detail_classe/<int:classe_id>/', views.detail_classe, name='detail_classe'),
+    path('supprimer_classe/<int:classe_id>/', views.supprimer_classe, name='supprimer_classe'),
+    path('supprimer_eleve/<int:eleve_id>/', views.supprimer_eleve, name='supprimer_eleve'),
 ]
