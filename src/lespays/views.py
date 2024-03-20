@@ -1,63 +1,62 @@
 from django.shortcuts import render, redirect
-from .models import Continent, Pays
-from .forms import FormContinent, FormPays
+from .models import Classe, Eleve
+from .forms import FormClasse, FormEleve
 
-from .serializer import ContinentSerializer, PaysSerializer
+from .serializer import ClasseSerializer, EleveSerializer
 from rest_framework import viewsets
 
-
 def accueil(request):
-    continents = Continent.objects.all()
-    return render(request, 'accueil.html', {'continents': continents})
+    classes = Classe.objects.all()
+    return render(request, 'accueil.html', {'classes': classes})
 
-def ajouter_continent(request):
+def ajouter_classe(request):
     if request.method == 'POST':
-        form = FormContinent(request.POST)
+        form = FormClasse(request.POST)
         if form.is_valid():
             form.save()
             return redirect('accueil')
     else:
-        form = FormContinent()
-    return render(request, 'ajouter_continent.html', {'form': form})
+        form = FormClasse()
+    return render(request, 'ajouter_classe.html', {'form': form})
 
-def ajouter_pays(request, continent_id):
-    continent = Continent.objects.get(pk=continent_id)
+def ajouter_eleve(request, classe_id):
+    classe = Classe.objects.get(pk=classe_id)
     if request.method == 'POST':
-        form = FormPays(request.POST)
+        form = FormEleve(request.POST)
         if form.is_valid():
-            pays = form.save(commit=False)
-            pays.continent = continent
-            pays.save()
-            # Redirection vers la page de détail du continent
-            return redirect('detail_continent', continent_id=continent_id)
+            eleve = form.save(commit=False)
+            eleve.classe = classe
+            eleve.save()
+            # Redirection vers la page de détail du classe
+            return redirect('detail_classe', classe_id=classe_id)
     else:
-        form = FormPays()
-    return render(request, 'ajouter_pays.html', {'form': form, 'continent': continent})
+        form = FormEleve()
+    return render(request, 'ajouter_eleve.html', {'form': form, 'classe': classe})
     
-def detail_continent(request, continent_id):
-    continent = Continent.objects.get(pk=continent_id)
-    pays = Pays.objects.filter(continent=continent)
-    return render(request, 'detail_continent.html', {'continent': continent, 'pays': pays})
+def detail_classe(request, classe_id):
+    classe = Classe.objects.get(pk=classe_id)
+    eleve = Eleve.objects.filter(classe=classe)
+    return render(request, 'detail_classe.html', {'classe': classe, 'eleve': eleve})
 
     
-def supprimer_continent(request, continent_id):
-    continent = Continent.objects.get(pk=continent_id)
-    continent.delete()
+def supprimer_classe(request, classe_id):
+    classe = Classe.objects.get(pk=classe_id)
+    classe.delete()
     return redirect('accueil')
 
-def supprimer_pays(request, pays_id):
-    pays = Pays.objects.get(pk=pays_id)
-    continent_id = pays.continent.id
-    pays.delete()
-    return redirect('detail_continent', continent_id=continent_id)
+def supprimer_eleve(request, eleve_id):
+    eleve = Eleve.objects.get(pk=eleve_id)
+    classe_id = eleve.classe.id
+    eleve.delete()
+    return redirect('detail_classe', classe_id=classe_id)
 
     
-class Continentviewset(viewsets.ModelViewSet):
+class Classeviewset(viewsets.ModelViewSet):
    
-    queryset = Continent.objects.all()
-    serializer_class = ContinentSerializer
+    queryset = Classe.objects.all()
+    serializer_class = ClasseSerializer
 
-class Paysviewset(viewsets.ModelViewSet):
+class Eleveviewset(viewsets.ModelViewSet):
     
-    queryset = Pays.objects.all()
-    serializer_class = PaysSerializer
+    queryset = Eleve.objects.all()
+    serializer_class = EleveSerializer
