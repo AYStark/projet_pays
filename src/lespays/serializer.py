@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from lespays.models import Continent,Pays
+from lespays.models import Classe,Eleve
 
-class ContinentSerializer(serializers.HyperlinkedModelSerializer):
+class ClasseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Continent
+        model = Classe
         fields = '__all__'
 
-class PaysSerializer(serializers.HyperlinkedModelSerializer):
+class EleveSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Pays
+        model = Eleve
         fields = '__all__'
