@@ -1,6 +1,5 @@
 from django.urls import path
 from lespays import views
-devise
 urlpatterns = [
     path('', views.accueil, name='accueil'),
     path('ajouter_classe/', views.ajouter_classe, name='ajouter_classe'),
