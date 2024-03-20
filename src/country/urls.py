@@ -2,13 +2,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 from django.contrib.auth.models import User
-from lespays.views import Continentviewset,Paysviewset
+from lespays.views import Classeviewset,Eleveviewset
 from rest_framework import routers
-from lespays.models import Continent,Pays
+from lespays.models import Classe,Eleve
 
 router = routers.DefaultRouter()
-router.register('Continent', Continentviewset)
-router.register('Pays', Paysviewset)
+router.register('Classe', Classeviewset)
+router.register('Eleve', Eleveviewset)
 
 
 urlpatterns = [
