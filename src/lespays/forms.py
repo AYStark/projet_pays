@@ -1,20 +1,21 @@
 from django import forms
-from .models import Continent, Pays
+from .models import Classe, Eleve
 
-class FormContinent(forms.ModelForm):
+class FormClasse(forms.ModelForm):
     class Meta:
-        model = Continent
-        fields = ['nom']
+        model = Classe
+        fields = ['nom','specialite']
         widgets = {
-            'nom': forms.TextInput(attrs={'class': 'form-control form-control-lg'})  # Ajouter la classe 'form-control-lg' de Bootstrap
+            'nom': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            'specialite': forms.TextInput(attrs={'class': 'form-control form-control-lg'}) 
         }
 
-class FormPays(forms.ModelForm):
+class FormEleve(forms.ModelForm):
     class Meta:
-        model = Pays
-        fields = ['nom', 'devise', 'superficie']
+        model = Eleve
+        fields = ['nom', 'lieu_de_naissance', 'date_de_naissance']
         widgets = {
             'nom': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),  # Ajouter la classe 'form-control-lg' de Bootstrap
-            'devise': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),  # Ajouter la classe 'form-control-lg' de Bootstrap
-            'superficie': forms.NumberInput(attrs={'class': 'form-control'})  # Conserver la classe 'form-control' de Bootstrap
+            'lieu_de_naissance': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),  # Ajouter la classe 'form-control-lg' de Bootstrap
+            'date_de_naissance': forms.NumberInput(attrs={'class': 'form-control'})  # Conserver la classe 'form-control' de Bootstrap
         }
